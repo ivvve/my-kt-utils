@@ -4,8 +4,20 @@ plugins {
     java
 }
 
-group = "com.tistory.devs0n"
-version = "1.0.0"
+// JitPack occurs `ERROR: No build artifacts found` after building project.
+// It can be solved by adding below.
+// See https://stackoverflow.com/questions/62876093/building-an-android-library-in-jitpack-error-no-build-artifacts-found
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.tistory.devs0n"
+            artifactId = "my-utils"
+            version = "1.0.0"
+
+            from(components["kotlin"])
+        }
+    }
+}
 
 repositories {
     mavenCentral()
